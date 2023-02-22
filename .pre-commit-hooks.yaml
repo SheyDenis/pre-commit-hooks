@@ -3,21 +3,21 @@
   entry: hooks/clang_format.sh
   language: script
   name: clang-format
-  stages: [commit]
+  default_stages: [commit]
   types: [c++]
 - id: cpp-check
+  default_stages: [commit]
   description: Execute cpp-check check.
   entry: hooks/cpp_check.sh
   language: script
   name: cpp-check
-  stages: [commit]
   types: [c++]
 - id: dev-marker
+  default_stages: [commit]
   description: Prevent committing DEV MARKERs
   entry: hooks/dev_marker.sh
   language: script
   name: dev-marker
-  stages: [commit]
 - id: isort
   description: Sort Python imports
   entry: hooks/isort
@@ -33,11 +33,12 @@
   name: mypy
   types_or: [python, pyi]
 - id: symbolic-links
+  default_stages: [commit]
   description: Prevent committing symbolic links
   entry: hooks/symbolic_links.sh
   language: script
   name: symbolic-links
-  stages: [commit]
+  types: [symlink]
 - id: xenon
   description: Run xenon complexity checks.
   entry: hooks/xenon

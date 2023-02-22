@@ -49,6 +49,7 @@ repos:
     language: script
     name: symbolic-links
     stages: [commit]
+    types: [symlink]
   - id: xenon
     entry: hooks/xenon
     language: script
