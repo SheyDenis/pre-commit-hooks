@@ -20,6 +20,7 @@ repos:
     entry: hooks/clang_format.sh
     language: script
     name: clang-format
+    args: [--error-limit, "6"]
     stages: [commit]
     types: [c++]
   - id: cpp-check

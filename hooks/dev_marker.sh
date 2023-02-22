@@ -8,7 +8,7 @@ rc=0
 for staged_file in ${@}; do
     echo_debug "Handling file [${staged_file}]"
     marker_lines=$(git diff --cached "${staged_file}" | grep -E "${DEV_MARKER_REGEX}" | sed "s/$/\\n/")
-    if [[ ${?} == 0 ]]; then
+    if [[ ${?} -ne 0 ]]; then
         rc=1
         OLDIFS="${IFS}"
         IFS=$'\n'
@@ -17,7 +17,6 @@ for staged_file in ${@}; do
         done
         IFS="${OLDIFS}"
     fi
-
 done
 
 echo_info "rc [${rc}]"
