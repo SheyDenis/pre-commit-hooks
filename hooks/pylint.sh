@@ -40,7 +40,7 @@ done
 
 rc=0
 for staged_file in ${@}; do
-    pylint "${staged_file}" --rcfile "${RCFILE}" --fail-under ${FAIL_UNDER}
+    pylint "${staged_file}" --rcfile "${RCFILE}" --fail-under ${FAIL_UNDER} &>/dev/null
 
     if [[ ${?} -ne 0 ]]; then
         rc=1

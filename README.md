@@ -6,5 +6,7 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 
 - [ ] Cleanup local repo yaml.
 - [ ] Add line numbers to dev-marker hook.
+- [ ] Implement xenon hook.
+- [ ] Implement yapf hook.
 - [ ] Cleanup log messages.
 - [ ] Re-write hooks in Python for simplicity.
