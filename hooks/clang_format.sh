@@ -34,14 +34,12 @@ done
 
 rc=0
 for staged_file in ${@}; do
-    echo_debug "Handling file [${staged_file}]"
-    res=$(clang-format --style=file --dry-run -Werror --ferror-limit=0 "${staged_file}" 2>&1)
+    clang-format --style=file --dry-run -Werror --ferror-limit=0 "${staged_file}" 2>&1
 
     if [[ ${?} -ne 0 ]]; then
         rc=1
-        echo_error "File failed clang-format check [${staged_file}] [${res}]."
+        echo_error "File failed clang-format check [${staged_file}]."
     fi
 done
 
-echo_info "rc [${rc}]"
 exit ${rc}

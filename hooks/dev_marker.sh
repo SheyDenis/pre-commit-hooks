@@ -6,7 +6,6 @@ DEV_MARKER_REGEX='([^\s]+ DEV MARKER.*$)'
 
 rc=0
 for staged_file in ${@}; do
-    echo_debug "Handling file [${staged_file}]"
     marker_lines=$(git diff --cached "${staged_file}" | grep -E "${DEV_MARKER_REGEX}" | sed "s/$/\\n/")
     if [[ ${?} -ne 0 ]]; then
         rc=1
