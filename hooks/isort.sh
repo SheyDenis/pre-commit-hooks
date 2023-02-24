@@ -34,7 +34,7 @@ done
 
 rc=0
 for staged_file in ${@}; do
-    isort --quiet --check-only "${staged_file}" --settings-file "${SETTINGS_FILE}" 2>&1
+    isort --quiet --check-only "${staged_file}" --settings-file "${SETTINGS_FILE}" &>/dev/null
 
     if [[ ${?} -ne 0 ]]; then
         rc=1

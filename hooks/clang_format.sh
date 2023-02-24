@@ -34,7 +34,7 @@ done
 
 rc=0
 for staged_file in ${@}; do
-    clang-format --style=file --dry-run -Werror --ferror-limit=0 "${staged_file}" 2>&1
+    clang-format --style=file --dry-run -Werror --ferror-limit=0 "${staged_file}" &>/dev/null
 
     if [[ ${?} -ne 0 ]]; then
         rc=1
