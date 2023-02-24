@@ -9,7 +9,7 @@ function usage() {
     echo ${usage_str} 1>&2
 }
 
-SETTINGS_FILE="$(dirname ${0})../configs/isort.cfg"
+SETTINGS_FILE="$(dirname ${0})/../configs/isort.cfg"
 options=$(getopt --longoptions 'settings-file:' -o '' -- "${@}")
 if [[ ${?} -ne 0 ]]; then
     usage
