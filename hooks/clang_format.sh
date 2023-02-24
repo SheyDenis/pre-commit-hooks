@@ -35,7 +35,7 @@ done
 rc=0
 for staged_file in ${@}; do
     echo_debug "Handling file [${staged_file}]"
-    res="$(clang-format --style=file --dry-run -Werror --ferror-limit=0 ${staged_file} 2>&1)"
+    res=$(clang-format --style=file --dry-run -Werror --ferror-limit=0 "${staged_file}" 2>&1)
 
     if [[ ${?} -ne 0 ]]; then
         rc=1

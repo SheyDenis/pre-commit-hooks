@@ -1,0 +1,6 @@
+[Denis]
+
+max-line-length=140
+good-names=e,k,v,ex,fh,rc,td
+max-module-lines=1500
+disable=missing-module-docstring,unnecessary-pass,import-error

@@ -6,13 +6,12 @@ repos:
   hooks:
   - id: check-added-large-files
   - id: check-shebang-scripts-are-executable
-  - id: check-yaml
+  - id: check-json
   - id: check-yaml
   - id: double-quote-string-fixer
   - id: end-of-file-fixer
   - id: no-commit-to-branch
     args: [--branch, master]
-  - id: pretty-format-json
   - id: trailing-whitespace
 - repo: local
   hooks:
@@ -20,13 +19,6 @@ repos:
     entry: hooks/clang_format.sh
     language: script
     name: clang-format
-    args: [--error-limit, "6"]
-    stages: [commit]
-    types: [c++]
-  - id: cpp-check
-    entry: cpp_check.sh
-    language: script
-    name: cpp-check
     stages: [commit]
     types: [c++]
   - id: dev-marker
@@ -34,16 +26,22 @@ repos:
     language: script
     name: dev-marker
   - id: isort
-    entry: isort
-    language: python
+    entry: hooks/isort.sh
+    language: script
     minimum_pre_commit_version: 2.9.0
     name: isort
     types_or: [python, pyi]
   - id: mypy
-    entry: mypy
-    language: python
+    entry: hooks/mypy.sh
+    language: script
     minimum_pre_commit_version: 2.9.0
     name: mypy
+    types_or: [python, pyi]
+  - id: pylint
+    entry: hooks/pylint.sh
+    language: script
+    minimum_pre_commit_version: 2.9.0
+    name: pylint
     types_or: [python, pyi]
   - id: symbolic-links
     entry: hooks/symbolic_links.sh
@@ -52,14 +50,14 @@ repos:
     stages: [commit]
     types: [symlink]
   - id: xenon
-    entry: hooks/xenon
+    entry: hooks/xenon.sh
     language: script
     minimum_pre_commit_version: 2.9.0
     name: xenon
     types_or: [python, pyi]
   - id: yapf
-    entry: yapf
-    language: python
+    entry: hooks/yapf.sh
+    language: script
     minimum_pre_commit_version: 2.9.0
     name: yapf
     types_or: [python, pyi]

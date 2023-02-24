@@ -5,13 +5,6 @@
   name: clang-format
   default_stages: [commit]
   types: [c++]
-- id: cpp-check
-  default_stages: [commit]
-  description: Execute cpp-check check.
-  entry: hooks/cpp_check.sh
-  language: script
-  name: cpp-check
-  types: [c++]
 - id: dev-marker
   default_stages: [commit]
   description: Prevent committing DEV MARKERs
@@ -20,17 +13,23 @@
   name: dev-marker
 - id: isort
   description: Sort Python imports
-  entry: hooks/isort
+  entry: hooks/isort.sh
   language: script
   minimum_pre_commit_version: 2.9.0
   name: isort
   types_or: [python, pyi]
 - id: mypy
   description: Run mypy.
-  entry: hooks/mypy
+  entry: hooks/mypy.sh
   language: script
   minimum_pre_commit_version: 2.9.0
   name: mypy
+  types_or: [python, pyi]
+- id: pylint
+  entry: hooks/pylint.sh
+  language: script
+  minimum_pre_commit_version: 2.9.0
+  name: pylint
   types_or: [python, pyi]
 - id: symbolic-links
   default_stages: [commit]
@@ -41,14 +40,14 @@
   types: [symlink]
 - id: xenon
   description: Run xenon complexity checks.
-  entry: hooks/xenon
+  entry: hooks/xenon.sh
   language: script
   minimum_pre_commit_version: 2.9.0
   name: xenon
   types_or: [python, pyi]
 - id: yapf
   description: Run yapf.
-  entry: hooks/yapf
+  entry: hooks/yapf.sh
   language: script
   minimum_pre_commit_version: 2.9.0
   name: yapf

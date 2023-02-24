@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 isort = "*"
 pre-commit = "*"
+pylint = "*"
 xenon = "*"
 yapf = "*"
 
