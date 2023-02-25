@@ -22,8 +22,8 @@ repos:
     stages: [commit]
     types: [c++]
   - id: dev-marker
-    entry: hooks/dev_marker.sh
-    language: script
+    entry: dev_marker
+    language: python
     name: dev-marker
   - id: isort
     entry: hooks/isort.sh
@@ -43,6 +43,7 @@ repos:
     minimum_pre_commit_version: 2.9.0
     name: pylint
     types_or: [python, pyi]
+    args: [--fail-under, "8"]
   - id: symbolic-links
     entry: hooks/symbolic_links.sh
     language: script

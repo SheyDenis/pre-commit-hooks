@@ -8,8 +8,8 @@
 - id: dev-marker
   stages: [ commit ]
   description: Prevent committing DEV MARKERs
-  entry: hooks/dev_marker.sh
-  language: script
+  entry: dev_marker
+  language: python
   name: dev-marker
 - id: isort
   description: Sort Python imports
