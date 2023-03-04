@@ -2,7 +2,7 @@ import os
 import sys
 from typing import Dict, Final, List, Union
 
-import toml
+# import toml
 from setuptools import setup
 
 # pylint: disable=missing-function-docstring
@@ -10,6 +10,11 @@ from setuptools import setup
 PackageVersion = Union[Dict[str, str], str]
 
 CONFIGS_DIR: Final[str] = 'configs'
+
+
+def get_version() -> str:
+    with open('VERSION', 'r', encoding='utf8') as fh:
+        return fh.readline()
 
 
 def get_package_requirements(package: str, version: PackageVersion):
@@ -32,12 +37,19 @@ def get_package_requirements(package: str, version: PackageVersion):
 
 
 def get_requirements() -> List[str]:
-    requirements: List[str] = []
-    with open('Pipfile', 'r', encoding='utf8') as fh:
-        pipfile = toml.load(fh)
+    requirements: List[str] = [
+        'isort',
+        'mypy',
+        'pre-commit',
+        'pylint',
+        'xenon',
+        'yapf',
+    ]  # FIXME - Get from Pipfile instead.
+    # with open('Pipfile', 'r', encoding='utf8') as fh:
+    #     pipfile = toml.load(fh)
 
-    for k, v in pipfile['packages'].items():
-        requirements.extend(get_package_requirements(k, v))
+    # for k, v in pipfile['packages'].items():
+    #     requirements.extend(get_package_requirements(k, v))
 
     return requirements
 
@@ -52,7 +64,7 @@ def get_configs_files() -> List[str]:
 
 setup(
     name='personal_pre_commit_hooks',
-    version='0.0.1',
+    version=get_version(),
     description='pre-commit git hooks for personal use.',
     author='Denis Sheyer',
     url='https://github.com/SheyDenis/pre-commit-hooks',
@@ -61,6 +73,17 @@ setup(
     ],
     packages=['hooks', 'utilities'],
     license='UNLICENSE',
-    entry_points={'console_scripts': ['dev_marker=hooks.dev_marker:main',]},
+    entry_points={
+        'console_scripts': [
+            # 'clang_format_hook=hooks.clang_format_hook:main',
+            'dev_marker_hook=hooks.dev_marker_hook:main',
+            # 'isort_hook=hooks.isort_hook:main',
+            # 'mypy_hook=hooks.mypy_hook:main',
+            # 'pylint_hook=hooks.pylint_hook:main',
+            # 'symbolic_links_hook=hooks.symbolic_links_hook:main',
+            # 'xenon_hook=hooks.xenon_hook:main',
+            # 'yapf_hook=hooks.yapf_hook:main',
+        ]
+    },
     install_requires=get_requirements(),
 )
