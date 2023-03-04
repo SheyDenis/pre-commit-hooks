@@ -15,50 +15,50 @@ repos:
   - id: trailing-whitespace
 - repo: local
   hooks:
-  - id: clang-format
+  - id: clang-format-hook
     entry: hooks/clang_format.sh
     language: script
-    name: clang-format
+    name: clang-format-hook
     stages: [commit]
     types: [c++]
-  - id: dev-marker
-    entry: dev_marker
+  - id: dev-marker-hook
+    entry: dev_marker_hook
     language: python
-    name: dev-marker
-  - id: isort
+    name: dev-marker-hook
+  - id: isort-hook
     entry: hooks/isort.sh
     language: script
     minimum_pre_commit_version: 2.9.0
-    name: isort
+    name: isort-hook
     types_or: [python, pyi]
-  - id: mypy
+  - id: mypy-hook
     entry: hooks/mypy.sh
     language: script
     minimum_pre_commit_version: 2.9.0
-    name: mypy
+    name: mypy-hook
     types_or: [python, pyi]
-  - id: pylint
+  - id: pylint-hook
     entry: hooks/pylint.sh
     language: script
     minimum_pre_commit_version: 2.9.0
-    name: pylint
+    name: pylint-hook
     types_or: [python, pyi]
     args: [--fail-under, "8"]
-  - id: symbolic-links
+  - id: symbolic-links-hook
     entry: hooks/symbolic_links.sh
     language: script
-    name: symbolic-links
+    name: symbolic-links-hook
     stages: [commit]
     types: [symlink]
-  - id: xenon
+  - id: xenon-hook
     entry: hooks/xenon.sh
     language: script
     minimum_pre_commit_version: 2.9.0
-    name: xenon
+    name: xenon-hook
     types_or: [python, pyi]
-  - id: yapf
+  - id: yapf-hook
     entry: hooks/yapf.sh
     language: script
     minimum_pre_commit_version: 2.9.0
-    name: yapf
+    name: yapf-hook
     types_or: [python, pyi]
