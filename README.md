@@ -4,6 +4,9 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 
 ### TODO
 
+- [ ] Increment version automatically on merge.
+  - [ ] Create git tag from version on merge.
+  - [ ] Create github release on merge.
 - [ ] Add line numbers to dev-marker hook.
 - [ ] Implement xenon hook.
 - [ ] Implement yapf hook.
@@ -12,6 +15,4 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 - [ ] Cleanup log messages.
 - [ ] Get requirements from `Pipfile.lock`.
   - [ ] Generate and commit `pipfile_requirements.txt` post-commit or at least check it was updated pre-commit.
-
 - [>] Re-write hooks in Python for simplicity.
-  - [ ] Increment version automatically on merge.
