@@ -62,4 +62,5 @@ setup(
     packages=['hooks', 'utilities'],
     license='UNLICENSE',
     entry_points={'console_scripts': ['dev_marker=hooks.dev_marker:main',]},
+    install_requires=get_requirements(),
 )
