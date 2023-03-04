@@ -2,7 +2,6 @@ import os
 import sys
 from typing import Dict, Final, List, Union
 
-# import toml
 from setuptools import setup
 
 # pylint: disable=missing-function-docstring
@@ -10,6 +9,7 @@ from setuptools import setup
 PackageVersion = Union[Dict[str, str], str]
 
 CONFIGS_DIR: Final[str] = 'configs'
+REQUIREMENTS_FILE: Final[str] = 'pipfile_requirements.txt'
 
 
 def get_version() -> str:
@@ -37,21 +37,8 @@ def get_package_requirements(package: str, version: PackageVersion):
 
 
 def get_requirements() -> List[str]:
-    requirements: List[str] = [
-        'isort',
-        'mypy',
-        'pre-commit',
-        'pylint',
-        'xenon',
-        'yapf',
-    ]  # FIXME - Get from Pipfile instead.
-    # with open('Pipfile', 'r', encoding='utf8') as fh:
-    #     pipfile = toml.load(fh)
-
-    # for k, v in pipfile['packages'].items():
-    #     requirements.extend(get_package_requirements(k, v))
-
-    return requirements
+    with open(REQUIREMENTS_FILE, 'r', encoding='utf8') as fh:
+        return [l.rstrip('\n') for l in fh.readlines()[1:]]
 
 
 def get_configs_files() -> List[str]:
