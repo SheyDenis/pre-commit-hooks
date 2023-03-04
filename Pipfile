@@ -8,13 +8,13 @@ isort = "*"
 mypy = "*"
 pre-commit = "*"
 pylint = "*"
-toml = "*"
 xenon = "*"
 yapf = "*"
 
 [dev-packages]
 personal-pre-commit-hooks = { path = ".", editable=true }
 pytest = "*"
+toml = "*"
 
 [requires]
 python_version = "3.10"
