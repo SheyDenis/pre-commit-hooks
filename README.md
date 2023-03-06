@@ -8,7 +8,7 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
   - [ ] Create git tag from version on merge.
   - [ ] Create github release on merge.
 - [ ] Add line numbers to dev-marker hook.
-- [ ] Implement xenon hook.
+- [x] Implement xenon hook.
 - [ ] Implement yapf hook.
 - [ ] Implement `utilities.proc.wait_to_finish()` waiting and TO kill.
 - [ ] Add `--dry-run` / `--no-dry-run` to `utilities.argparse.get_base_parser()`.

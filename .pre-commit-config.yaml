@@ -49,8 +49,8 @@ repos:
     name: symbolic-links-hook
     types: [symlink]
   - id: xenon-hook
-    entry: hooks/xenon.sh
-    language: script
+    entry: xenon_hook
+    language: python
     minimum_pre_commit_version: 2.9.0
     name: xenon-hook
     types_or: [python, pyi]
