@@ -1,13 +1,13 @@
 import sys
 from argparse import Namespace
 from dataclasses import dataclass
-from typing import List, Literal, Tuple
+from typing import List, Literal, Tuple, TypeAlias, cast
 
 from utilities.argparse import get_base_parser
 from utilities.logger import global_logger as logger
 from utilities.proc import run_cmd, wait_to_finish
 
-ComplexityRank = Literal['A', 'B', 'C', 'D', 'E', 'F']
+ComplexityRank: TypeAlias = Literal['A', 'B', 'C', 'D', 'E', 'F']
 
 
 @dataclass(frozen=True)
@@ -21,9 +21,9 @@ def parse_arguments() -> Namespace:
     base_parse = get_base_parser()
 
     complexity_group = base_parse.add_argument_group('complexity')
-    complexity_group.add_argument('--max-average-complexity', type=str, default='B', choices=list(ComplexityRank.__args__))
-    complexity_group.add_argument('--max-modules-complexity', type=str, default='B', choices=list(ComplexityRank.__args__))
-    complexity_group.add_argument('--max-absolute-complexity', type=str, default='B', choices=list(ComplexityRank.__args__))
+    complexity_group.add_argument('--max-average-complexity', type=str, default='B', choices=list(ComplexityRank.__args__))  # type: ignore
+    complexity_group.add_argument('--max-modules-complexity', type=str, default='B', choices=list(ComplexityRank.__args__))  # type: ignore
+    complexity_group.add_argument('--max-absolute-complexity', type=str, default='B', choices=list(ComplexityRank.__args__))  # type: ignore
 
     return base_parse.parse_args()
 
@@ -35,12 +35,12 @@ def check_file(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool,
         '--max-absolute', complexity_ranks.max_absolute_complexity, file_name
     ]
 
-    proc_rc, proc_stdout, proc_stderr = wait_to_finish(run_cmd(cmd))
+    proc_rc, _, proc_stderr = wait_to_finish(run_cmd(cmd))
 
     output: List[str] = []
     if proc_rc != 0:
         res = True
-        output = proc_stderr.split('\n')
+        output = cast(str, proc_stderr).split('\n')
 
     return res, output
 
