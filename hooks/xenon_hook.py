@@ -1,7 +1,7 @@
 import sys
 from argparse import Namespace
 from dataclasses import dataclass
-from typing import Final, List, Literal, Tuple, TypeAlias, cast
+from typing import Final, List, Literal, Tuple, cast
 
 from utilities.argparse import get_base_parser
 from utilities.logger import global_logger as logger
@@ -9,7 +9,7 @@ from utilities.proc import run_cmd, wait_to_finish
 
 HOOK_NAME: Final[str] = 'xenon'
 
-ComplexityRank: TypeAlias = Literal['A', 'B', 'C', 'D', 'E', 'F']
+ComplexityRank = Literal['A', 'B', 'C', 'D', 'E', 'F']
 
 # pylint: disable=missing-class-docstring,missing-function-docstring
 

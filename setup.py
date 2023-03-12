@@ -1,8 +1,7 @@
 import os
 from typing import Dict, Final, List, Union
 
-from setuptools import setup
-from setuptools import find_packages
+from setuptools import find_packages, setup
 
 # pylint: disable=missing-function-docstring
 
