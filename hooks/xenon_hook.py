@@ -61,7 +61,7 @@ def main() -> int:
         if not res:
             continue
         rc = 1
-        logger.error('File [%s] failed %d check with [%d] errors', file_name, HOOK_NAME, len(cmd_output))
+        logger.error('File [%s] failed %s check with [%d] errors', file_name, HOOK_NAME, len(cmd_output))
 
     return rc
 
