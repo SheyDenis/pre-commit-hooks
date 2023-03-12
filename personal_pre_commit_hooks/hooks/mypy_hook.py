@@ -2,9 +2,9 @@ import sys
 from argparse import Namespace
 from typing import List
 
-from utilities.argparse import get_base_parser
-from utilities.logger import global_logger as logger
-from utilities.proc import run_cmd, wait_to_finish
+from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 # pylint: disable=missing-function-docstring
 

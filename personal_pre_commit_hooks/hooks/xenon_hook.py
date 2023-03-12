@@ -3,9 +3,9 @@ from argparse import Namespace
 from dataclasses import dataclass
 from typing import Final, List, Literal, Tuple, cast
 
-from utilities.argparse import get_base_parser
-from utilities.logger import global_logger as logger
-from utilities.proc import run_cmd, wait_to_finish
+from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 HOOK_NAME: Final[str] = 'xenon'
 

@@ -3,10 +3,10 @@ import sys
 from argparse import Namespace
 from typing import Final, List, Tuple, cast
 
-from utilities.argparse import get_base_parser
-from utilities.constants import get_config_file_path
-from utilities.logger import global_logger as logger
-from utilities.proc import run_cmd, wait_to_finish
+from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.constants import get_config_file_path
+from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 HOOK_NAME: Final[str] = 'pylint'
 DEFAULT_RC_FILE: Final[str] = get_config_file_path('pylintrc')

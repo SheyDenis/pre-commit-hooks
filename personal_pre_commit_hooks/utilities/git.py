@@ -1,6 +1,6 @@
 from typing import List, cast
 
-from utilities.proc import run_cmd, wait_to_finish
+from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 # pylint: disable=missing-function-docstring
 

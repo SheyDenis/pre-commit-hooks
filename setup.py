@@ -7,13 +7,13 @@ from setuptools import find_packages, setup
 
 PackageVersion = Union[Dict[str, str], str]
 
-CONFIGS_DIR: Final[str] = 'configs'
+CONFIGS_DIR: Final[str] = 'personal_pre_commit_hooks/configs'
 REQUIREMENTS_FILE: Final[str] = 'pipfile_requirements.txt'
 
 
 def get_version() -> str:
     with open('VERSION', 'r', encoding='utf8') as fh:
-        return fh.readline()
+        return fh.readline().rstrip('\n')
 
 
 def get_requirements() -> List[str]:
@@ -22,6 +22,7 @@ def get_requirements() -> List[str]:
 
 
 def get_configs_files() -> List[str]:
+    # TODO - Remove this.
     configs_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), CONFIGS_DIR)
     config_files: List[str] = [
         os.path.join(CONFIGS_DIR, f) for f in os.listdir(configs_dir) if os.path.isfile(os.path.join(configs_dir, f))
@@ -30,27 +31,24 @@ def get_configs_files() -> List[str]:
 
 
 setup(
-    name='personal_pre_commit_hooks',
+    name='personal-pre-commit-hooks',
     version=get_version(),
     description='pre-commit git hooks for personal use.',
     author='Denis Sheyer',
     url='https://github.com/SheyDenis/pre-commit-hooks',
-    data_files=[
-        ('configs', get_configs_files()),
-    ],
-    packages=find_packages(include=('hooks', 'utilities')),
+    packages=find_packages(),
     include_package_data=True,
     license='UNLICENSE',
     entry_points={
         'console_scripts': [
-            # 'clang_format_hook=hooks.clang_format_hook:main',
-            'dev_marker_hook=hooks.dev_marker_hook:main',
-            'isort_hook=hooks.isort_hook:main',
-            'mypy_hook=hooks.mypy_hook:main',
-            'pylint_hook=hooks.pylint_hook:main',
-            # 'symbolic_links_hook=hooks.symbolic_links_hook:main',
-            'xenon_hook=hooks.xenon_hook:main',
-            'yapf_hook=hooks.yapf_hook:main',
+            # 'clang_format_hook=personal_pre_commit_hooks.hooks.clang_format_hook:main',
+            'dev_marker_hook=personal_pre_commit_hooks.hooks.dev_marker_hook:main',
+            'isort_hook=personal_pre_commit_hooks.hooks.isort_hook:main',
+            'mypy_hook=personal_pre_commit_hooks.hooks.mypy_hook:main',
+            'pylint_hook=personal_pre_commit_hooks.hooks.pylint_hook:main',
+            # 'symbolic_links_hook=personal_pre_commit_hooks.hooks.symbolic_links_hook:main',
+            'xenon_hook=personal_pre_commit_hooks.hooks.xenon_hook:main',
+            'yapf_hook=personal_pre_commit_hooks.hooks.yapf_hook:main',
         ]
     },
     install_requires=get_requirements(),

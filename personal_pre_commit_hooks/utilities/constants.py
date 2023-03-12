@@ -6,9 +6,7 @@ LOGGER_DEBUG_ARG: Final[str] = '--logger-level-debug'
 
 def get_configs_dir() -> str:
     """Get patch to config files directory."""
-    # FIXME - Should point to directory inside package.
-    return os.path.normpath(
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir, os.path.pardir, os.path.pardir, os.path.pardir, 'configs'))
+    return os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir, 'configs'))
 
 
 def get_config_file_path(file_name: str) -> str:

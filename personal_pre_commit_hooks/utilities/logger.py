@@ -2,7 +2,7 @@ import logging
 import sys
 from typing import Tuple
 
-from utilities.constants import LOGGER_DEBUG_ARG
+from personal_pre_commit_hooks.utilities.constants import LOGGER_DEBUG_ARG
 
 # pylint: disable=missing-function-docstring
 _DEFAULT_LOG_LEVEL = logging.DEBUG if LOGGER_DEBUG_ARG in sys.argv else logging.INFO

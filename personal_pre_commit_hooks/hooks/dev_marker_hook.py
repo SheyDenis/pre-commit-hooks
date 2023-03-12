@@ -3,9 +3,9 @@ import sys
 from argparse import Namespace
 from typing import Dict, Final, List, Tuple
 
-from utilities.argparse import get_base_parser
-from utilities.git import get_staged_diff, get_staged_files
-from utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.git import get_staged_diff, get_staged_files
+from personal_pre_commit_hooks.utilities.logger import global_logger as logger
 
 # pylint: disable=missing-function-docstring
 DEV_MARKER_EXPRS: Final[Dict[bool, Tuple[re.Pattern, ...]]] = {
