@@ -11,5 +11,10 @@ def get_configs_dir() -> str:
 
 def get_config_file_path(file_name: str) -> str:
     """Get patch to config file."""
-    # FIXME - Explode if file missing.
-    return os.path.join(get_configs_dir(), file_name)
+    config_file_path: str = os.path.join(get_configs_dir(), file_name)
+
+    if not os.path.isfile(config_file_path):
+        if os.path.isdir(config_file_path):
+            raise RuntimeError('File [%s] is a directory', (config_file_path,))  # pylint: disable=raising-format-tuple
+        raise RuntimeError('No such file [%s]', (config_file_path,))  # pylint: disable=raising-format-tuple
+    return config_file_path

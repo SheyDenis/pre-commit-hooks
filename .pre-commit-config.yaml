@@ -16,7 +16,7 @@ repos:
 - repo: local
   hooks:
   - id: clang-format-hook
-    entry: hooks/clang_format.sh
+    entry: personal_pre_commit_hooks/hooks/clang_format.sh
     language: script
     name: clang-format-hook
     types: [c++]
@@ -44,7 +44,7 @@ repos:
     types_or: [python, pyi]
     args: [--fail-under, "8"]
   - id: symbolic-links-hook
-    entry: hooks/symbolic_links.sh
+    entry: personal_pre_commit_hooks/hooks/symbolic_links.sh
     language: script
     name: symbolic-links-hook
     types: [symlink]
