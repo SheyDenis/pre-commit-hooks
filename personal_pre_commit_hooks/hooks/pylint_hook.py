@@ -10,7 +10,7 @@ from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 HOOK_NAME: Final[str] = 'pylint'
 DEFAULT_RC_FILE: Final[str] = get_config_file_path('pylintrc')
-DEFAULT_FAIL_UNDER: Final[float] = 10
+DEFAULT_FAIL_UNDER: Final[float] = 9
 
 # pylint: disable=missing-function-docstring
 

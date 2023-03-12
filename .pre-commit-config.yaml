@@ -16,8 +16,8 @@ repos:
 - repo: local
   hooks:
   - id: clang-format-hook
-    entry: personal_pre_commit_hooks/hooks/clang_format.sh
-    language: script
+    entry: clang_format_hook
+    language: python
     name: clang-format-hook
     types: [c++]
   - id: dev-marker-hook

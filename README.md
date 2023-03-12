@@ -18,9 +18,9 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 - [ ] Log error messages if hook failed to execute.
 - [ ] Get requirements from `Pipfile.lock`.
     - [ ] Generate and commit `pipfile_requirements.txt` post-commit or at least check it was updated pre-commit.
-- [ ] Remove dependency on `toml` in `generate_requirements.py`.
+- [x] Remove dependency on `toml` in `generate_requirements.py`.
 - [>] Re-write hooks in Python for simplicity.
-    - [ ] clang_format
+    - [x] clang_format
     - [x] isort
     - [x] mypy
     - [x] pylint

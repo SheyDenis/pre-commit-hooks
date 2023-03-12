@@ -41,7 +41,7 @@ setup(
     license='UNLICENSE',
     entry_points={
         'console_scripts': [
-            # 'clang_format_hook=personal_pre_commit_hooks.hooks.clang_format_hook:main',
+            'clang_format_hook=personal_pre_commit_hooks.hooks.clang_format_hook:main',
             'dev_marker_hook=personal_pre_commit_hooks.hooks.dev_marker_hook:main',
             'isort_hook=personal_pre_commit_hooks.hooks.isort_hook:main',
             'mypy_hook=personal_pre_commit_hooks.hooks.mypy_hook:main',

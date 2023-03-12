@@ -1,7 +1,7 @@
 - id: clang-format-hook
   description: Execute clang-format check.
-  entry: personal_pre_commit_hooks/hooks/clang_format.sh
-  language: script
+  entry: clang_format_hook
+  language: python
   name: clang-format-hook
   stages: [commit]
   types: [c++]
