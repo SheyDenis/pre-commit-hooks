@@ -19,7 +19,7 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 - [>] Re-write hooks in Python for simplicity.
     - [ ] clang_format
     - [x] isort
-    - [ ] mypy
+    - [x] mypy
     - [ ] pylint
     - [ ] symbolic_links
     - [ ] yapf

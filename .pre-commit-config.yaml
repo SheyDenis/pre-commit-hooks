@@ -31,8 +31,8 @@ repos:
     name: isort-hook
     types_or: [python, pyi]
   - id: mypy-hook
-    entry: hooks/mypy.sh
-    language: script
+    entry: mypy_hook
+    language: python
     minimum_pre_commit_version: 2.9.0
     name: mypy-hook
     types_or: [python, pyi]
