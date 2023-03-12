@@ -6,6 +6,7 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 
 - [x] Fix `setup.py` and where it specifies the files should be installed to.
 - [ ] Rewrite `setup.py` as `setup.cfg`.
+- [ ] Cleanup `setup.py`.
 - [x] Verify config file exists in `utilities.constants.get_config_file_path()`.
 - [ ] Increment version automatically on merge.
     - [ ] Create git tag from version on merge.
