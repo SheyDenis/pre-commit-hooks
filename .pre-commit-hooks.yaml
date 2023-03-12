@@ -13,8 +13,8 @@
   name: dev-marker-hook
 - id: isort-hook
   description: Sort Python imports
-  entry: hooks/isort.sh
-  language: script
+  entry: isort_hook
+  language: python
   minimum_pre_commit_version: 2.9.0
   name: isort-hook
   types_or: [python, pyi]

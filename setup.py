@@ -1,5 +1,4 @@
 import os
-import sys
 from typing import Dict, Final, List, Union
 
 from setuptools import setup
@@ -15,25 +14,6 @@ REQUIREMENTS_FILE: Final[str] = 'pipfile_requirements.txt'
 def get_version() -> str:
     with open('VERSION', 'r', encoding='utf8') as fh:
         return fh.readline()
-
-
-def get_package_requirements(package: str, version: PackageVersion):
-    packages: List[str] = []
-    package_name = package
-    package_version = ''
-    if isinstance(version, dict):
-        if 'sys_platform' in version and version['sys_platform'].split()[1].strip() != sys.platform:
-            return packages
-        if 'version' in version and version['version'] != '*':
-            package_version = version['version']
-        if 'extras' in version:
-            for extra in version['extras']:
-                packages.append(f'{package}[{extra}]{package_version}')
-    else:
-        if isinstance(version, str) and version != '*':
-            package_name = f'{package}{version}'
-    packages.append(f'{package_name}{package_version}')
-    return packages
 
 
 def get_requirements() -> List[str]:
@@ -64,7 +44,7 @@ setup(
         'console_scripts': [
             # 'clang_format_hook=hooks.clang_format_hook:main',
             'dev_marker_hook=hooks.dev_marker_hook:main',
-            # 'isort_hook=hooks.isort_hook:main',
+            'isort_hook=hooks.isort_hook:main',
             # 'mypy_hook=hooks.mypy_hook:main',
             # 'pylint_hook=hooks.pylint_hook:main',
             # 'symbolic_links_hook=hooks.symbolic_links_hook:main',

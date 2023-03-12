@@ -40,6 +40,10 @@ def get_requirements() -> List[str]:
     return requirements
 
 
-if __name__ == '__main__':
+def write_requirements() -> None:
     with open(OUTPUT_FILE, 'w', encoding='utf8') as fh:
         fh.write('\n'.join([OUTPUT_FILE_HEADER.format(by_what=os.path.basename(__file__)), *get_requirements(), '']))
+
+
+if __name__ == '__main__':
+    write_requirements()

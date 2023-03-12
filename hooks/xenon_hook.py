@@ -28,7 +28,7 @@ def parse_arguments() -> Namespace:
     return base_parse.parse_args()
 
 
-def check_file(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool, List[str]]:
+def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool, List[str]]:
     res: bool = False
     cmd: List[str] = [
         'xenon', '--max-average', complexity_ranks.max_average_complexity, '--max-modules', complexity_ranks.max_modules_complexity,
@@ -53,7 +53,7 @@ def main() -> int:
                                        max_modules_complexity=args.max_modules_complexity,
                                        max_absolute_complexity=args.max_absolute_complexity)
     for file_name in args.filenames:
-        res, cmd_output = check_file(file_name, complexity_ranks)
+        res, cmd_output = file_failed_check(file_name, complexity_ranks)
         if not res:
             continue
         rc = 1
