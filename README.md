@@ -20,6 +20,6 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
     - [ ] clang_format
     - [x] isort
     - [x] mypy
-    - [ ] pylint
+    - [x] pylint
     - [ ] symbolic_links
     - [ ] yapf

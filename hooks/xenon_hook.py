@@ -9,6 +9,8 @@ from utilities.proc import run_cmd, wait_to_finish
 
 ComplexityRank: TypeAlias = Literal['A', 'B', 'C', 'D', 'E', 'F']
 
+# pylint: disable=missing-class-docstring,missing-function-docstring
+
 
 @dataclass(frozen=True)
 class ComplexityRanks:

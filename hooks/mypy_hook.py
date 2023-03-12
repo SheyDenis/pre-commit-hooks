@@ -6,6 +6,8 @@ from utilities.argparse import get_base_parser
 from utilities.logger import global_logger as logger
 from utilities.proc import run_cmd, wait_to_finish
 
+# pylint: disable=missing-function-docstring
+
 
 def parse_arguments() -> Namespace:
     base_parse = get_base_parser()

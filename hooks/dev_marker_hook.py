@@ -25,7 +25,7 @@ def check_containing_dev_marker(filename: str, check_staged: bool = True) -> Tup
 
     lines_to_check: List[str]
     if not check_staged:
-        with open(filename, 'r') as fh:
+        with open(filename, 'r', encoding='utf8') as fh:
             lines_to_check = fh.readlines()
     else:
         lines_to_check = get_staged_diff(filename)

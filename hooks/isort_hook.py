@@ -10,6 +10,8 @@ from utilities.proc import run_cmd, wait_to_finish
 __CURRENT_DIR: Final[str] = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_SETTINGS_FILE: Final[str] = os.path.normpath(os.path.join(__CURRENT_DIR, os.path.pardir, 'configs', 'isort.cfg'))
 
+# pylint: disable=missing-function-docstring
+
 
 def parse_arguments() -> Namespace:
     base_parse = get_base_parser()

@@ -46,7 +46,7 @@ setup(
             'dev_marker_hook=hooks.dev_marker_hook:main',
             'isort_hook=hooks.isort_hook:main',
             'mypy_hook=hooks.mypy_hook:main',
-            # 'pylint_hook=hooks.pylint_hook:main',
+            'pylint_hook=hooks.pylint_hook:main',
             # 'symbolic_links_hook=hooks.symbolic_links_hook:main',
             'xenon_hook=hooks.xenon_hook:main',
             # 'yapf_hook=hooks.yapf_hook:main',

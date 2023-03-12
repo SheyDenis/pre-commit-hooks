@@ -26,8 +26,8 @@
   name: mypy-hook
   types_or: [python, pyi]
 - id: pylint-hook
-  entry: hooks/pylint.sh
-  language: script
+  entry: pylint_hook
+  language: python
   minimum_pre_commit_version: 2.9.0
   name: pylint-hook
   types_or: [python, pyi]
