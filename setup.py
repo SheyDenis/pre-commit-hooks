@@ -49,7 +49,7 @@ setup(
             'pylint_hook=hooks.pylint_hook:main',
             # 'symbolic_links_hook=hooks.symbolic_links_hook:main',
             'xenon_hook=hooks.xenon_hook:main',
-            # 'yapf_hook=hooks.yapf_hook:main',
+            'yapf_hook=hooks.yapf_hook:main',
         ]
     },
     install_requires=get_requirements(),

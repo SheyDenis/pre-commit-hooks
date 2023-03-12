@@ -22,4 +22,4 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
     - [x] mypy
     - [x] pylint
     - [ ] symbolic_links
-    - [ ] yapf
+    - [x] yapf

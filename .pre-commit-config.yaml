@@ -55,8 +55,8 @@ repos:
     name: xenon-hook
     types_or: [python, pyi]
   - id: yapf-hook
-    entry: hooks/yapf.sh
-    language: script
+    entry: yapf_hook
+    language: python
     minimum_pre_commit_version: 2.9.0
     name: yapf-hook
     types_or: [python, pyi]
