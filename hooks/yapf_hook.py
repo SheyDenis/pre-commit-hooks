@@ -1,14 +1,15 @@
-import os
 import sys
 from argparse import Namespace
 from typing import Final, List
 
 from utilities.argparse import get_base_parser
+from utilities.constants import get_config_file_path
 from utilities.logger import global_logger as logger
 from utilities.proc import run_cmd, wait_to_finish
 
-__CURRENT_DIR: Final[str] = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_STYLE_FILE: Final[str] = os.path.normpath(os.path.join(__CURRENT_DIR, os.path.pardir, 'configs', 'yapf_style'))
+HOOK_NAME: Final[str] = 'yapf'
+
+DEFAULT_STYLE_FILE: Final[str] = get_config_file_path('yapf_style')
 
 # pylint: disable=missing-function-docstring
 
@@ -23,8 +24,12 @@ def parse_arguments() -> Namespace:
 
 def file_failed_check(file_name: str, style_file: str) -> bool:
     cmd: List[str] = ['yapf', '--diff', '--style', style_file, file_name]
-    proc_rc, _, _ = wait_to_finish(run_cmd(cmd))
+    proc_rc, _, proc_stderr = wait_to_finish(run_cmd(cmd))
 
+    if proc_stderr and False:
+        # FIXME - Only log error if some configuration error.
+        logger.error('Failed to execute %s [%s]', HOOK_NAME, proc_stderr)
+        raise RuntimeError(proc_stderr)
     return proc_rc != 0
 
 
@@ -37,7 +42,7 @@ def main() -> int:
         if not res:
             continue
         rc = 1
-        logger.error('File [%s] failed yapf check', file_name)
+        logger.error('File [%s] failed %s check', file_name, HOOK_NAME)
 
     return rc
 

@@ -1,11 +1,13 @@
 import sys
 from argparse import Namespace
 from dataclasses import dataclass
-from typing import List, Literal, Tuple, TypeAlias, cast
+from typing import Final, List, Literal, Tuple, TypeAlias, cast
 
 from utilities.argparse import get_base_parser
 from utilities.logger import global_logger as logger
 from utilities.proc import run_cmd, wait_to_finish
+
+HOOK_NAME: Final[str] = 'xenon'
 
 ComplexityRank: TypeAlias = Literal['A', 'B', 'C', 'D', 'E', 'F']
 
@@ -59,7 +61,7 @@ def main() -> int:
         if not res:
             continue
         rc = 1
-        logger.error('File [%s] failed xenon check with [%d] errors', file_name, len(cmd_output))
+        logger.error('File [%s] failed %d check with [%d] errors', file_name, HOOK_NAME, len(cmd_output))
 
     return rc
 

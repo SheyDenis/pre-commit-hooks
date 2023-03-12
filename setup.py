@@ -2,6 +2,7 @@ import os
 from typing import Dict, Final, List, Union
 
 from setuptools import setup
+from setuptools import find_packages
 
 # pylint: disable=missing-function-docstring
 
@@ -38,7 +39,8 @@ setup(
     data_files=[
         ('configs', get_configs_files()),
     ],
-    packages=['hooks', 'utilities'],
+    packages=find_packages(include=('hooks', 'utilities')),
+    include_package_data=True,
     license='UNLICENSE',
     entry_points={
         'console_scripts': [
