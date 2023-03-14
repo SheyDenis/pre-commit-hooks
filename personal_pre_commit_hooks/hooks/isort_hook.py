@@ -22,7 +22,7 @@ def parse_arguments() -> Namespace:
 
 
 def file_failed_check(file_name: str, settings_file: str) -> bool:
-    cmd: List[str] = ['isort', '--quiet', '--check-only', file_name, '--settings-file', settings_file]
+    cmd: List[str] = ['isort', '--quiet', '--check-only', file_name, '--settings-file', settings_file, '--src', '.']
     proc_rc, _, proc_stderr = wait_to_finish(run_cmd(cmd))
 
     if proc_stderr and False:
