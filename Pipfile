@@ -15,6 +15,7 @@ yapf = "*"
 personal-pre-commit-hooks = { path = ".", editable = true }
 pytest = "*"
 toml = "*"
+types-toml = "*"
 
 [requires]
 python_version = "3.8"
