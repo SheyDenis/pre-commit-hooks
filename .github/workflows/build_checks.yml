@@ -30,6 +30,3 @@ jobs:
         run: diff pipfile_requirements.txt pipfile_requirements_test.txt
       - name: Check Tag Is New
         run: '[[ -z $(git tag -l | grep -E "^$(cat VERSION)$") ]]'
-      - run: git tag -l
-      - run: cat VERSION
-      - run: git tag -l | grep -E "^$(cat VERSION)$"
