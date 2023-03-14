@@ -1,0 +1,2 @@
+include personal_pre_commit_hooks/configs/*
+include personal_pre_commit_hooks/hooks/*.sh

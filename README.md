@@ -4,14 +4,18 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 
 ### TODO
 
+- [ ] Rewrite `setup.py` as `setup.cfg`.
+- [ ] Cleanup `setup.py`.
 - [ ] Add line numbers to dev-marker hook.
-- [ ] Implement xenon hook.
-- [ ] Implement yapf hook.
+- [ ] Implement line endings hook.
 - [ ] Implement `utilities.proc.wait_to_finish()` waiting and TO kill.
 - [ ] Add `--dry-run` / `--no-dry-run` to `utilities.argparse.get_base_parser()`.
 - [ ] Cleanup log messages.
-- [ ] Get requirements from `Pipfile.lock`.
-  - [ ] Generate and commit `pipfile_requirements.txt` post-commit or at least check it was updated pre-commit.
-
+- [ ] Log error messages if hook failed to execute.
 - [>] Re-write hooks in Python for simplicity.
-  - [ ] Increment version automatically on merge.
+    - [x] clang_format
+    - [x] isort
+    - [x] mypy
+    - [x] pylint
+    - [ ] symbolic_links
+    - [x] yapf

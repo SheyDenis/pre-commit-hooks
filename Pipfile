@@ -12,8 +12,10 @@ xenon = "*"
 yapf = "*"
 
 [dev-packages]
-personal-pre-commit-hooks = { path = ".", editable=true }
+personal-pre-commit-hooks = { path = ".", editable = true }
 pytest = "*"
+toml = "*"
+types-toml = "*"
 
 [requires]
-python_version = "3.10"
+python_version = "3.8"

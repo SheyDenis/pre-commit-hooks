@@ -3,9 +3,9 @@ import sys
 from argparse import Namespace
 from typing import Dict, Final, List, Tuple
 
-from utilities.argparse import get_base_parser
-from utilities.git import get_staged_diff, get_staged_files
-from utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.git import get_staged_diff, get_staged_files
+from personal_pre_commit_hooks.utilities.logger import global_logger as logger
 
 # pylint: disable=missing-function-docstring
 DEV_MARKER_EXPRS: Final[Dict[bool, Tuple[re.Pattern, ...]]] = {
@@ -25,7 +25,7 @@ def check_containing_dev_marker(filename: str, check_staged: bool = True) -> Tup
 
     lines_to_check: List[str]
     if not check_staged:
-        with open(filename, 'r') as fh:
+        with open(filename, 'r', encoding='utf8') as fh:
             lines_to_check = fh.readlines()
     else:
         lines_to_check = get_staged_diff(filename)

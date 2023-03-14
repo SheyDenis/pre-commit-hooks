@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from utilities.constants import LOGGER_DEBUG_ARG
+from personal_pre_commit_hooks.utilities.constants import LOGGER_DEBUG_ARG
 
 
 def get_base_parser() -> ArgumentParser:
