@@ -12,7 +12,7 @@ xenon = "*"
 yapf = "*"
 
 [dev-packages]
-personal-pre-commit-hooks = { path = ".", editable=true }
+personal-pre-commit-hooks = { path = ".", editable = true }
 pytest = "*"
 toml = "*"
 
