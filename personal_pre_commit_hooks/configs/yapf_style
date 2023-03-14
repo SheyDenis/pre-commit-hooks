@@ -1,7 +1,12 @@
 [style]
 based_on_style = yapf
-indent_width = 4
 column_limit = 140
-SPLIT_BEFORE_NAMED_ASSIGNS = False
-SPLIT_ALL_TOP_LEVEL_COMMA_SEPARATED_VALUES = False
-SPLIT_BEFORE_FIRST_ARGUMENT = False
+each_dict_entry_on_separate_line = true
+force_multiline_dict = true
+indent_width = 4
+spaces_before_comment = 2
+split_all_top_level_comma_separated_values = false
+split_arguments_when_comma_terminated = true
+split_before_first_argument = false
+split_before_named_assigns =  false
+split_complex_comprehension = true
