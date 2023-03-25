@@ -4,6 +4,7 @@ Git hooks for personal use based on https://github.com/pre-commit/pre-commit .
 
 ### TODO
 
+- [ ] Fix gitflows not triggering when opening a new PR.
 - [ ] Rewrite `setup.py` as `setup.cfg`.
 - [ ] Cleanup `setup.py`.
 - [ ] Add line numbers to dev-marker hook.
