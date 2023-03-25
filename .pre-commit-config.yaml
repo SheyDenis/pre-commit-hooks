@@ -30,6 +30,10 @@ repos:
     minimum_pre_commit_version: 2.9.0
     name: isort-hook
     types_or: [python, pyi]
+  - id: line-endings-hook
+    entry: line_endings_hook
+    language: python
+    name: line-endings-hook
   - id: mypy-hook
     entry: mypy_hook
     language: python

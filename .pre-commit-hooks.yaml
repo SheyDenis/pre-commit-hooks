@@ -18,6 +18,11 @@
   minimum_pre_commit_version: 2.9.0
   name: isort-hook
   types_or: [python, pyi]
+- id: line-endings-hook
+  description: Check files are committed with LF endings.
+  entry: line_endings_hook
+  language: python
+  name: line-endings-hook
 - id: mypy-hook
   description: Run mypy.
   entry: mypy_hook

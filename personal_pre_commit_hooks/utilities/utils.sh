@@ -7,23 +7,23 @@ WHITE='\033[1;37m'
 YELLOW='\033[1;33m'
 
 function __echo_color() {
-    color="${1}"
-    shift
-    echo -e "${color}${@}\033[0m"
+  color="${1}"
+  shift
+  echo -e "${color}${@}\033[0m"
 }
 
 function echo_error() {
-    __echo_color ${RED} ${@}
+  __echo_color ${RED} ${@}
 }
 
 function echo_warning() {
-    __echo_color ${YELLOW} ${@}
+  __echo_color ${YELLOW} ${@}
 }
 
 function echo_info() {
-    __echo_color ${NC} ${@}
+  __echo_color ${NC} ${@}
 }
 
 function echo_debug() {
-    __echo_color ${BLUE}"[DEBUG]" ${NC} ${@}
+  __echo_color ${BLUE}"[DEBUG]" ${NC} ${@}
 }
