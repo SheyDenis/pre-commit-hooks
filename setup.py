@@ -44,9 +44,9 @@ setup(
             'clang_format_hook=personal_pre_commit_hooks.hooks.clang_format_hook:main',
             'dev_marker_hook=personal_pre_commit_hooks.hooks.dev_marker_hook:main',
             'isort_hook=personal_pre_commit_hooks.hooks.isort_hook:main',
+            'line_endings_hook=personal_pre_commit_hooks.hooks.line_endings_hook:main',
             'mypy_hook=personal_pre_commit_hooks.hooks.mypy_hook:main',
             'pylint_hook=personal_pre_commit_hooks.hooks.pylint_hook:main',
-            # 'symbolic_links_hook=personal_pre_commit_hooks.hooks.symbolic_links_hook:main',
             'xenon_hook=personal_pre_commit_hooks.hooks.xenon_hook:main',
             'yapf_hook=personal_pre_commit_hooks.hooks.yapf_hook:main',
         ]

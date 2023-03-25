@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname ${0})/utils.sh"
+source "$(dirname ${0})/../utilities/utils.sh"
 
 rc=0
 for staged_file in ${@}; do
