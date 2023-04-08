@@ -3,12 +3,15 @@ from argparse import ArgumentParser
 from personal_pre_commit_hooks.utilities.constants import LOGGER_DEBUG_ARG
 
 
-def get_base_parser() -> ArgumentParser:
+def get_base_parser(**kwargs) -> ArgumentParser:
     """Get the base parser with the common arguments."""
-    # TODO - Add `--dry-run` / `--no-dry-run`
-    parser = ArgumentParser()
+    parser = ArgumentParser(**kwargs)
 
     parser.add_argument('filenames', nargs='*', help='Filenames to check')
     parser.add_argument(LOGGER_DEBUG_ARG, action='store_true', help='Set logger to debug level')
+
+    dry_run_group = parser.add_mutually_exclusive_group()
+    dry_run_group.add_argument('--dry-run', action='store_true', dest='dry_run', default=True)
+    dry_run_group.add_argument('--no-dry-run', action='store_false', dest='dry_run')
 
     return parser
