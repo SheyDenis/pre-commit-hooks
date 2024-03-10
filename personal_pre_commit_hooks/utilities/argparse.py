@@ -9,6 +9,7 @@ def get_base_parser(**kwargs) -> ArgumentParser:
 
     parser.add_argument('filenames', nargs='*', help='Filenames to check')
     parser.add_argument(LOGGER_DEBUG_ARG, action='store_true', help='Set logger to debug level')
+    parser.add_argument('--quiet', action='store_true', help='Only output if a hook failed or not without detailed output')
 
     dry_run_group = parser.add_mutually_exclusive_group()
     dry_run_group.add_argument('--dry-run', action='store_true', dest='dry_run', default=True)

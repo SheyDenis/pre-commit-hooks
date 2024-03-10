@@ -1,10 +1,10 @@
 import sys
 from argparse import Namespace
 from dataclasses import dataclass
-from typing import Final, List, Literal, Tuple, cast
+from typing import Final, List, Literal, Optional, Tuple
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
-from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 HOOK_NAME: Final[str] = 'xenon'
@@ -32,7 +32,7 @@ def parse_arguments() -> Namespace:
     return base_parse.parse_args()
 
 
-def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool, List[str]]:
+def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool, Optional[str]]:
     res: bool = False
     cmd: List[str] = [
         'xenon', '--max-average', complexity_ranks.max_average_complexity, '--max-modules', complexity_ranks.max_modules_complexity,
@@ -41,10 +41,10 @@ def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tupl
 
     proc_rc, _, proc_stderr = wait_to_finish(run_cmd(cmd))
 
-    output: List[str] = []
+    output: Optional[str] = None
     if proc_rc != 0:
         res = True
-        output = cast(str, proc_stderr).split('\n')
+        output = proc_stderr
 
     return res, output
 
@@ -57,11 +57,13 @@ def main() -> int:
                                        max_modules_complexity=args.max_modules_complexity,
                                        max_absolute_complexity=args.max_absolute_complexity)
     for file_name in args.filenames:
-        res, cmd_output = file_failed_check(file_name, complexity_ranks)
+        res: bool
+        hook_output: Optional[str]
+        res, hook_output = file_failed_check(file_name, complexity_ranks)
         if not res:
             continue
         rc = 1
-        logger.error('File [%s] failed %s check with [%d] errors', file_name, HOOK_NAME, len(cmd_output))
+        output_hook_error(hook_name=HOOK_NAME, file_name=file_name, hook_output=hook_output, hook_args=args)
 
     return rc
 
