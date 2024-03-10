@@ -1,10 +1,11 @@
 import re
 import sys
 from argparse import Namespace
-from typing import Final, List, Tuple, cast
+from typing import Final, List, Optional, Tuple, cast
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
 from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
 HOOK_NAME: Final[str] = 'line_endings'
@@ -18,7 +19,7 @@ def parse_arguments() -> Namespace:
     return base_parse.parse_args()
 
 
-def file_failed_check(file_name) -> Tuple[bool, str]:
+def file_failed_check(file_name) -> Tuple[bool, Optional[str]]:
     cmd: List[str] = ['file', file_name]
     _, proc_stdout, proc_stderr = wait_to_finish(run_cmd(cmd))
 
@@ -27,7 +28,7 @@ def file_failed_check(file_name) -> Tuple[bool, str]:
         logger.error('Failed to execute %s [%s]', HOOK_NAME, proc_stderr)
         raise RuntimeError(proc_stderr)
 
-    output: str = ''
+    output: Optional[str] = None
     failed: bool = False
     matched = re.search(r'with ([^ ]+) line terminators', cast(str, proc_stdout))
     if matched is not None:
@@ -42,11 +43,13 @@ def main() -> int:
 
     rc: int = 0
     for file_name in args.filenames:
-        res, cmd_output = file_failed_check(file_name)
+        res: bool
+        hook_output: Optional[str]
+        res, hook_output = file_failed_check(file_name)
         if not res:
             continue
         rc = 1
-        logger.error('File [%s] failed %s check [%s]', file_name, HOOK_NAME, cmd_output)
+        output_hook_error(hook_name=HOOK_NAME, file_name=file_name, hook_output=hook_output, hook_args=args)
 
     return rc
 

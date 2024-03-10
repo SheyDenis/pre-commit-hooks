@@ -1,11 +1,15 @@
 import subprocess
 from typing import List, Optional, Tuple, Union
 
+from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+
 
 def run_cmd(cmd: Union[List[str], str], **kwargs) -> subprocess.Popen:
     """Run command using subprocess package."""
     if isinstance(cmd, list):
         cmd = ' '.join(cmd)
+
+    logger.debug('Executing command [%s]', cmd)
     popen_kwargs = {
         'shell': kwargs.get('shell', True),
         'stderr': kwargs.get('stderr', subprocess.PIPE),

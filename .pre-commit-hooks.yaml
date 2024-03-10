@@ -7,7 +7,7 @@
   types: [ c++ ]
 - id: dev-marker-hook
   stages: [ commit ]
-  description: Prevent committing DEV MARKERs
+  description: Prevent committing "dev markers".
   entry: dev_marker_hook
   language: python
   name: dev-marker-hook
