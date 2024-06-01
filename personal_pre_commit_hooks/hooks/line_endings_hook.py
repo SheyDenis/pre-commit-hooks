@@ -5,6 +5,7 @@ from typing import Final, List, Optional, Tuple, cast
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
 from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.models import CmdOutput
 from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
@@ -21,16 +22,16 @@ def parse_arguments() -> Namespace:
 
 def file_failed_check(file_name) -> Tuple[bool, Optional[str]]:
     cmd: List[str] = ['file', file_name]
-    _, proc_stdout, proc_stderr = wait_to_finish(run_cmd(cmd))
+    cmd_output: CmdOutput = wait_to_finish(run_cmd(cmd))
 
-    if (proc_stderr or not proc_stdout) and False:
+    if (cmd_output.stderr or not cmd_output.stdout) and False:
         # FIXME - Only log error if some configuration error.
-        logger.error('Failed to execute %s [%s]', HOOK_NAME, proc_stderr)
-        raise RuntimeError(proc_stderr)
+        logger.error('Failed to execute %s [%s]', HOOK_NAME, cmd_output.stderr)
+        raise RuntimeError(cmd_output.stderr)
 
     output: Optional[str] = None
     failed: bool = False
-    matched = re.search(r'with ([^ ]+) line terminators', cast(str, proc_stdout))
+    matched = re.search(r'with ([^ ]+) line terminators', cast(str, cmd_output.stdout))
     if matched is not None:
         failed = True
         output = f'{matched.group(1)} line endings'

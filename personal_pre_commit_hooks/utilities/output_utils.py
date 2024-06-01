@@ -3,6 +3,8 @@ from typing import Optional
 
 from personal_pre_commit_hooks.utilities.logger import global_logger as logger
 
+# pylint: disable=missing-function-docstring
+
 
 def output_hook_error(hook_name: str, file_name: str, hook_output: Optional[str], *, hook_args: Namespace) -> None:
     logger.error('File [%s] failed %s check', file_name, hook_name)

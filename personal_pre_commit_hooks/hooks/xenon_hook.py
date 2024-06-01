@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Final, List, Literal, Optional, Tuple
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.models import CmdOutput
 from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
@@ -35,16 +36,22 @@ def parse_arguments() -> Namespace:
 def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool, Optional[str]]:
     res: bool = False
     cmd: List[str] = [
-        'xenon', '--max-average', complexity_ranks.max_average_complexity, '--max-modules', complexity_ranks.max_modules_complexity,
-        '--max-absolute', complexity_ranks.max_absolute_complexity, file_name
+        'xenon',
+        '--max-average',
+        complexity_ranks.max_average_complexity,
+        '--max-modules',
+        complexity_ranks.max_modules_complexity,
+        '--max-absolute',
+        complexity_ranks.max_absolute_complexity,
+        file_name,
     ]
 
-    proc_rc, _, proc_stderr = wait_to_finish(run_cmd(cmd))
+    cmd_output: CmdOutput = wait_to_finish(run_cmd(cmd))
 
     output: Optional[str] = None
-    if proc_rc != 0:
+    if cmd_output.rc != 0:
         res = True
-        output = proc_stderr
+        output = cmd_output.stderr
 
     return res, output
 
