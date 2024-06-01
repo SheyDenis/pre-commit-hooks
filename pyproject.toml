@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "pre-commit-hooks"
+version = "0.2.5"
+description = ""
+authors = ["SheyDenis <denis.sheyer@gmail.com>"]
+readme = "README.md"
+license = "UNLICENSE"
+
+packages = [{ include = "personal_pre_commit_hooks/" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+isort = "*"
+mypy = "*"
+pre-commit = "*"
+pylint = "*"
+xenon = "*"
+yapf = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+toml = "*"
+types-toml = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

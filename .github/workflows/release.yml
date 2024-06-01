@@ -13,7 +13,18 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5.0.0
+        with:
+          python-version: '3.11'
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Install Dependencies
+        run: poetry install
+      - name: Create version file
+        run: 'python tools/get_project_version.py >| VERSION'
       - name: Read Version
         id: version
         uses: juliangruber/read-file-action@v1.1.6
@@ -22,4 +33,4 @@ jobs:
       - name: Create/Update tag
         uses: rickstaa/action-create-tag@v1.6.1
         with:
-          tag: "${{ steps.version.outputs.content }}"
+          tag: '${{ steps.version.outputs.content }}'
