@@ -16,17 +16,15 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.3.0
-      - uses: actions/setup-python@v4.5.0
+      - uses: actions/checkout@v4.1.1
         with:
-          python-version: '3.8'
-      - name: PrepareEnv
-        run: python -mpip install pipenv
+          fetch-depth: 0
+      - uses: actions/setup-python@v5.0.0
+        with:
+          python-version: '3.11'
+      - name: Install poetry
+        run: pipx install poetry
       - name: Install Dependencies
-        run: pipenv sync --dev
-      - name: Generate Requirements
-        run: pipenv run python generate_requirements.py --output-file pipfile_requirements_test.txt
-      - name: Check Requirements Are Up To Date
-        run: diff pipfile_requirements.txt pipfile_requirements_test.txt
+        run: poetry install
       - name: Check Tag Is New
-        run: '[[ -z $(git tag -l | grep -E "^$(cat VERSION)$") ]]'
+        run: '[[ -z $(git tag -l | grep -E ^$(python tools/get_project_version.py)$) ]]'

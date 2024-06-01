@@ -38,7 +38,7 @@ def check_containing_dev_marker(filename: str, check_staged: bool = True) -> Tup
                 res = True
                 break
 
-    return res, dev_marker_lines  # TODO - Add line number to output
+    return res, dev_marker_lines  # TODO - Add line number to output. <PCH-3>
 
 
 def main() -> int:

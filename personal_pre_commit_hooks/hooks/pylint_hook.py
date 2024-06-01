@@ -6,6 +6,7 @@ from typing import Final, List, Optional, Tuple, cast
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
 from personal_pre_commit_hooks.utilities.constants import get_config_file_path
 from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.models import CmdOutput
 from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
@@ -27,20 +28,20 @@ def parse_arguments() -> Namespace:
 
 def file_failed_check(file_name: str, rcfile: str, fail_under: float) -> Tuple[bool, Optional[str]]:
     cmd: List[str] = ['pylint', file_name, '--rcfile', rcfile, '--fail-under', str(fail_under)]
-    proc_rc, proc_stdout, proc_stderr = wait_to_finish(run_cmd(cmd))
+    cmd_output: CmdOutput = wait_to_finish(run_cmd(cmd))
 
-    if proc_stderr and False:
+    if cmd_output.stderr and False:
         # FIXME - Only log error if some configuration error.
-        logger.error('Failed to execute %s [%s]', HOOK_NAME, proc_stderr)
-        raise RuntimeError(proc_stderr)
+        logger.error('Failed to execute %s [%s]', HOOK_NAME, cmd_output.stderr)
+        raise RuntimeError(cmd_output.stderr)
 
     output: Optional[str] = None
-    if proc_rc != 0:
-        proc_stdout_lines = cast(str, proc_stdout).split('\n')
-        logger.debug('%s output:\n%s', HOOK_NAME, proc_stdout)
+    if cmd_output.rc != 0:
+        proc_stdout_lines = cast(str, cmd_output.stdout).split('\n')
+        logger.debug('%s output:\n%s', HOOK_NAME, cmd_output.stdout)
         output = ', '.join(line for line in proc_stdout_lines if re.match(r'^Your code has been rated.*', line))
 
-    return proc_rc != 0, output
+    return cmd_output.rc != 0, output
 
 
 def main() -> int:

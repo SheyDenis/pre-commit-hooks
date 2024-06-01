@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "personal-pre-commit-hooks"
+version = "0.0.1"
+description = ""
+authors = ["SheyDenis <denis.sheyer@gmail.com>"]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

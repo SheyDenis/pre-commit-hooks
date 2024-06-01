@@ -1,7 +1,8 @@
 import subprocess
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional, Union
 
 from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.models import CmdOutput
 
 
 def run_cmd(cmd: Union[List[str], str], **kwargs) -> subprocess.Popen:
@@ -18,8 +19,10 @@ def run_cmd(cmd: Union[List[str], str], **kwargs) -> subprocess.Popen:
     return subprocess.Popen(cmd, **popen_kwargs)
 
 
-def wait_to_finish(proc: subprocess.Popen, timeout_seconds: int = 5) -> Tuple[int, Optional[str], Optional[str]]:
+# pylint: disable-next=unused-argument
+def wait_to_finish(proc: subprocess.Popen, timeout_seconds: int = 5) -> CmdOutput:
     """Wait for process to finish with a timeout."""
+    # pylint: disable-next=fixme
     # TODO - Implement waiting and TO kill
     cmd_stdout, cmd_stderr = proc.communicate()
 
@@ -30,4 +33,4 @@ def wait_to_finish(proc: subprocess.Popen, timeout_seconds: int = 5) -> Tuple[in
     if cmd_stderr is not None:
         cmd_stderr_str = cmd_stderr.decode('utf8')
 
-    return proc.returncode, cmd_stdout_str, cmd_stderr_str
+    return CmdOutput(rc=proc.returncode, stdout=cmd_stdout_str, stderr=cmd_stderr_str)

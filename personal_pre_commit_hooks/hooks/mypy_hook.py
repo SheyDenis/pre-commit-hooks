@@ -3,6 +3,7 @@ from argparse import Namespace
 from typing import Final, List, Optional, Tuple
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
+from personal_pre_commit_hooks.utilities.models import CmdOutput
 from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
@@ -22,9 +23,9 @@ def file_failed_check(file_name: str) -> Tuple[bool, Optional[str]]:
         '--ignore-missing-imports',
         file_name,
     ]
-    proc_rc, proc_stdout, _ = wait_to_finish(run_cmd(cmd))
+    cmd_output: CmdOutput = wait_to_finish(run_cmd(cmd))
 
-    return proc_rc != 0, proc_stdout
+    return cmd_output.rc != 0, cmd_output.stdout
 
 
 def main() -> int:
