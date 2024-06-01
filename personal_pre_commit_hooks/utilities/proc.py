@@ -18,8 +18,10 @@ def run_cmd(cmd: Union[List[str], str], **kwargs) -> subprocess.Popen:
     return subprocess.Popen(cmd, **popen_kwargs)
 
 
+# pylint: disable-next=unused-argument
 def wait_to_finish(proc: subprocess.Popen, timeout_seconds: int = 5) -> Tuple[int, Optional[str], Optional[str]]:
     """Wait for process to finish with a timeout."""
+    # pylint: disable-next=fixme
     # TODO - Implement waiting and TO kill
     cmd_stdout, cmd_stderr = proc.communicate()
 
