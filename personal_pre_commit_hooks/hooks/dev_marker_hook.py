@@ -5,13 +5,17 @@ from typing import Dict, Final, List, Tuple
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
 from personal_pre_commit_hooks.utilities.git import get_staged_diff, get_staged_files
-from personal_pre_commit_hooks.utilities.logger import global_logger as logger
+from personal_pre_commit_hooks.utilities.models import FileCheckResult
+from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 
-# pylint: disable=missing-function-docstring
+HOOK_NAME: Final[str] = 'dev-marker'
+
 DEV_MARKER_EXPRS: Final[Dict[bool, Tuple[re.Pattern, ...]]] = {
     False: (re.compile(r'^.*([^\s]+ DEV MARKER.*$)'),),
     True: (re.compile(r'^\+.*([^\s]+ DEV MARKER.*$)'),),
 }
+
+# pylint: disable=missing-function-docstring
 
 
 def parse_arguments() -> Namespace:
@@ -19,7 +23,7 @@ def parse_arguments() -> Namespace:
     return base_parse.parse_args()
 
 
-def check_containing_dev_marker(filename: str, check_staged: bool = True) -> Tuple[bool, List[str]]:
+def check_containing_dev_marker(filename: str, check_staged: bool = True) -> FileCheckResult:
     dev_marker_lines: List[str] = []
     res: bool = False
 
@@ -38,7 +42,8 @@ def check_containing_dev_marker(filename: str, check_staged: bool = True) -> Tup
                 res = True
                 break
 
-    return res, dev_marker_lines  # TODO - Add line number to output. <PCH-3>
+    return FileCheckResult(file_name=filename, failed=res, cmd='-',
+                           hook_output=f'Found [{len(dev_marker_lines)}] dev markers in file [{filename}]')
 
 
 def main() -> int:
@@ -47,12 +52,12 @@ def main() -> int:
     rc: int = 0
     staged_files = get_staged_files()
     for staged_file in args.filenames:
-        staged: bool = staged_file in staged_files
-        res, dev_marker_lines = check_containing_dev_marker(staged_file, staged)
-        if not res:
+        staged: bool = staged_file in staged_files  # If hook is running on all files and not as a pre-commit.
+        res: FileCheckResult = check_containing_dev_marker(staged_file, staged)
+        if not res.failed:
             continue
         rc = 1
-        logger.error('Found [%d] dev markers in file [%s]', len(dev_marker_lines), staged_file)
+        output_hook_error(hook_name=HOOK_NAME, hook_result=res, hook_args=args)
 
     return rc
 

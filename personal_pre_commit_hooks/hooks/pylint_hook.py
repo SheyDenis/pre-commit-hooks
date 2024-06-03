@@ -1,12 +1,12 @@
 import re
 import sys
 from argparse import Namespace
-from typing import Final, List, Optional, Tuple, cast
+from typing import Final, List, Optional, cast
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
 from personal_pre_commit_hooks.utilities.constants import get_config_file_path
 from personal_pre_commit_hooks.utilities.logger import global_logger as logger
-from personal_pre_commit_hooks.utilities.models import CmdOutput
+from personal_pre_commit_hooks.utilities.models import CmdOutput, FileCheckResult
 from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
@@ -26,7 +26,7 @@ def parse_arguments() -> Namespace:
     return base_parse.parse_args()
 
 
-def file_failed_check(file_name: str, rcfile: str, fail_under: float) -> Tuple[bool, Optional[str]]:
+def file_failed_check(file_name: str, rcfile: str, fail_under: float) -> FileCheckResult:
     cmd: List[str] = ['pylint', file_name, '--rcfile', rcfile, '--fail-under', str(fail_under)]
     cmd_output: CmdOutput = wait_to_finish(run_cmd(cmd))
 
@@ -41,7 +41,7 @@ def file_failed_check(file_name: str, rcfile: str, fail_under: float) -> Tuple[b
         logger.debug('%s output:\n%s', HOOK_NAME, cmd_output.stdout)
         output = ', '.join(line for line in proc_stdout_lines if re.match(r'^Your code has been rated.*', line))
 
-    return cmd_output.rc != 0, output
+    return FileCheckResult(file_name=file_name, failed=cmd_output.rc != 0, cmd=cmd, hook_output=output)
 
 
 def main() -> int:
@@ -49,13 +49,11 @@ def main() -> int:
 
     rc: int = 0
     for file_name in args.filenames:
-        res: bool
-        hook_output: Optional[str]
-        res, hook_output = file_failed_check(file_name, args.rcfile, args.fail_under)
-        if not res:
+        res: FileCheckResult = file_failed_check(file_name, args.rcfile, args.fail_under)
+        if not res.failed:
             continue
         rc = 1
-        output_hook_error(hook_name=HOOK_NAME, file_name=file_name, hook_output=hook_output, hook_args=args)
+        output_hook_error(hook_name=HOOK_NAME, hook_result=res, hook_args=args)
 
     return rc
 

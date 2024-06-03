@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any, Dict
 
-import toml
+import tomllib
 
 # pylint: disable=missing-function-docstring
 
@@ -13,8 +13,8 @@ def get_project_root() -> Path:
 def print_project_version() -> None:
     project_root = get_project_root()
     data: Dict[str, Any]
-    with open(project_root / 'pyproject.toml', 'r', encoding='utf8') as fh:
-        data = toml.load(fh)
+    with open(project_root / 'pyproject.toml', 'rb') as fh:
+        data = tomllib.load(fh)
     print(data['tool']['poetry']['version'])
 
 

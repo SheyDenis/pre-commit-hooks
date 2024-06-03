@@ -1,10 +1,10 @@
 import sys
 from argparse import Namespace
 from dataclasses import dataclass
-from typing import Final, List, Literal, Optional, Tuple
+from typing import Final, List, Literal, Optional
 
 from personal_pre_commit_hooks.utilities.argparse import get_base_parser
-from personal_pre_commit_hooks.utilities.models import CmdOutput
+from personal_pre_commit_hooks.utilities.models import CmdOutput, FileCheckResult
 from personal_pre_commit_hooks.utilities.output_utils import output_hook_error
 from personal_pre_commit_hooks.utilities.proc import run_cmd, wait_to_finish
 
@@ -33,7 +33,7 @@ def parse_arguments() -> Namespace:
     return base_parse.parse_args()
 
 
-def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tuple[bool, Optional[str]]:
+def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> FileCheckResult:
     res: bool = False
     cmd: List[str] = [
         'xenon',
@@ -53,7 +53,7 @@ def file_failed_check(file_name: str, complexity_ranks: ComplexityRanks) -> Tupl
         res = True
         output = cmd_output.stderr
 
-    return res, output
+    return FileCheckResult(file_name=file_name, failed=res, cmd=cmd, hook_output=output)
 
 
 def main() -> int:
@@ -64,13 +64,11 @@ def main() -> int:
                                        max_modules_complexity=args.max_modules_complexity,
                                        max_absolute_complexity=args.max_absolute_complexity)
     for file_name in args.filenames:
-        res: bool
-        hook_output: Optional[str]
-        res, hook_output = file_failed_check(file_name, complexity_ranks)
-        if not res:
+        res: FileCheckResult = file_failed_check(file_name, complexity_ranks)
+        if not res.failed:
             continue
         rc = 1
-        output_hook_error(hook_name=HOOK_NAME, file_name=file_name, hook_output=hook_output, hook_args=args)
+        output_hook_error(hook_name=HOOK_NAME, hook_result=res, hook_args=args)
 
     return rc
 
