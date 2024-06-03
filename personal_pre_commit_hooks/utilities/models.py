@@ -16,4 +16,4 @@ class FileCheckResult:
     file_name: str
     failed: bool
     cmd: Union[str, List[str]]
-    hook_output: Optional[str] = None
+    hook_output: Optional[Union[str, List[str]]] = None

@@ -19,10 +19,16 @@ def output_hook_error(hook_name: str, hook_result: FileCheckResult, *, hook_args
     else:
         cmd = hook_result.cmd
 
+    hook_output: str
+    if isinstance(hook_result.hook_output, list):
+        hook_output = '\n'.join(hook_result.hook_output)
+    else:
+        hook_output = hook_result.hook_output if hook_result.hook_output is not None else ''
+
     output_data: List[str] = [
         f'hook_name={hook_name}',
         f'filename={hook_result.file_name}',
         f'cmd={cmd}',
-        f'hook_output={hook_result.hook_output}',
+        f'hook_output={hook_output}',
     ]
     logger.error(json.dumps(output_data, indent=2))
