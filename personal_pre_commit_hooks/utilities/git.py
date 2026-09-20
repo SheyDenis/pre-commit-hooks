@@ -17,7 +17,7 @@ def get_staged_files() -> List[str]:
 
 
 def get_staged_diff(staged_file: str) -> List[str]:
-    proc = run_cmd(f'git diff --cached {staged_file}', dry_run=False)
+    proc = run_cmd(f'git diff --cached "{staged_file}"', dry_run=False)
     cmd_output: CmdOutput = wait_to_finish(proc)
 
     if cmd_output.rc != 0:
